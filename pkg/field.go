@@ -28,7 +28,15 @@ func NewField(width, height int) *Field {
 	}
 }
 
-func (f Field) GetFreeCoordinates(offset int) (x, y int) {
+func (f *Field) GetObject(x, y int) Object {
+	return f.objects[y][x]
+}
+
+func (f *Field) SetObject(x, y int, obj Object) {
+	f.objects[y][x] = obj
+}
+
+func (f *Field) GetFreeCoordinates(offset int) (x, y int) {
 	for {
 		x = offset + rand.Intn(len(f.objects[0])-offset)
 		y = offset + rand.Intn(len(f.objects)-offset)
@@ -40,7 +48,7 @@ func (f Field) GetFreeCoordinates(offset int) (x, y int) {
 	}
 }
 
-func (f Field) ShowField() {
+func (f *Field) ShowField() {
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
 	cmd.Run()

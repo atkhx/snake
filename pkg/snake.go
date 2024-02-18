@@ -67,7 +67,7 @@ func (s *Snake) Tick() {
 		return
 	}
 
-	if obj := s.Field.objects[ny][nx]; obj != nil {
+	if obj := s.Field.GetObject(nx, ny); obj != nil {
 		if _, ok := obj.(*Apple); ok {
 			s.Body = append(s.Body, Position{})
 		} else {
@@ -81,6 +81,6 @@ func (s *Snake) Tick() {
 	s.Body[0].X = nx
 	s.Body[0].Y = ny
 
-	s.Field.objects[ty][tx] = nil
-	s.Field.objects[ny][nx] = s
+	s.Field.SetObject(tx, ty, nil)
+	s.Field.SetObject(nx, ny, s)
 }

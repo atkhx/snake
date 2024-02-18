@@ -22,12 +22,11 @@ const appleTTL = 20
 const gameTick = 200 * time.Millisecond
 
 func NewGame(width, height int) *Game {
-	field := NewField(width, height)
-
 	x, y := width/2, height/2
 
+	field := NewField(width, height)
 	snake := NewSnake(x, y, field)
-	field.objects[y][x] = snake
+	field.SetObject(x, y, snake)
 
 	return &Game{
 		Snake:  snake,
